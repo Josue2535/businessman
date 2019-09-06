@@ -13,14 +13,14 @@ import java.util.Date;
  * college Icesi (Cali-Colombia)
  * github: https://github.com/Josue2535
  */
-public class Pet implements Serializable{
+public class Pet implements Serializable, Comparable<Pet>{
 	
 	
 
 
 	public final static String MALE = "MALE";
 	public final static String FEMALE = "FEMALE";
-	
+
 	
 	
 	private String id;
@@ -107,7 +107,7 @@ public class Pet implements Serializable{
 
 	
 	//end getters and setters----------------------------------------------
-	public int compareId(Pet o) {
+	public int compareTo(Pet o) {
 		int valorComparacion = id.compareToIgnoreCase( o.getId() );
     	if(valorComparacion < 0){
     		valorComparacion = -1;

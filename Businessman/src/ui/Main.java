@@ -30,6 +30,7 @@ public class Main {
 		System.out.println("4. Delate a club.");
 		System.out.println("5. Delate a client from a club.");
 		System.out.println("6. Delate a pet from a client.");
+		System.out.println("7. Delate a pet from a client.");
 		System.out.println("7. CHAU ");
 		System.out.println("----------------------------------------- \n");
 	}
@@ -52,7 +53,7 @@ public class Main {
 
 			showMenuOptions();
 
-			System.out.println("--------------------------------------");
+			System.out.println("------------------------------------------");
 			System.out.print("| Type the number of your selection: ");
 			try {
 				userInput = reader.nextInt();
