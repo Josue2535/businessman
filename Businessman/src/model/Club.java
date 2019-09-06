@@ -92,7 +92,76 @@ public class Club {
 	public int foundClienLastNO() {
 		int f = 0;
 		return f;
+	}
+	public int foundClienBirthNO() {
+		int f = 0;
+		return f;
+	}
+	public int foundClienBirthBi() {
+		int f = 0;
+		return f;
+	}
+	public int foundClienPetsNO() {
+		int f = 0;
+		return f;
+	}
+	public int foundClienPetsBi() {
+		int f = 0;
+		return f;
+	}
+	public int foundClientFvPeNo() {
+		int f =0;
+		return f;
+	}
+	public int foundClientFvPeBi() {
+		int f =0;
+		return f;
+	}
+	//---------------------------------END FOUND CLIENT-----------------
+	//---------------------------------START FOUND PET----------------------------
+	public int foundPetNameBi() {
+		int f = 0;
+		return f;
+	}
+	public int foundPetNameNo() {
+		int f = 0;
+		return f;
+	}
+	public int foundPetIdBi() {
+		int f = 0;
+		return f;
 	} 
+	public int foundPetIdNo() {
+		int f = 0;
+		return f;
+	} 
+	
+	public int foundPetBirthNO() {
+		int f = 0;
+		return f;
+	}
+	public int foundPetBirthBi() {
+		int f = 0;
+		return f;
+	}
+	
+	public int foundPetTypeNo() {
+		int f =0;
+		return f;
+	}
+	public int foundPetTypeBi() {
+		int f =0;
+		return f;
+	}
+	public int foundPetGenderNo() {
+		int f =0;
+		return f;
+	}
+	public int foundPetGenderBi() {
+		int f =0;
+		return f;
+	}
+	
 	
 
 
