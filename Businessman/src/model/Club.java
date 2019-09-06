@@ -8,19 +8,25 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
+import java.util.Date;
+/**
+ * @author Josue Rodriguez
+ * @version 1.0
+ * lab2
+ * college Icesi (Cali-Colombia)
+ * github: https://github.com/Josue2535
+ */
 
 public class Club {
 	
 	private String id;
 	private String name;
 	private ArrayList<Client> clients;
-	private GregorianCalendar issueDate;
+	private Date issueDate;
 	private String typeOfPet;
 	
 	
-	public Club(String id, String name, GregorianCalendar issueDate) {
-		super();
+	public Club(String id, String name, Date issueDate) {
 		this.id = id;
 		this.name = name;
 		this.issueDate = issueDate;
@@ -47,10 +53,10 @@ public class Club {
 	public void setClients(ArrayList<Client> clients) {
 		this.clients = clients;
 	}
-	public GregorianCalendar getIssueDate() {
+	public Date getIssueDate() {
 		return issueDate;
 	}
-	public void setIssueDate(GregorianCalendar issueDate) {
+	public void setIssueDate(Date issueDate) {
 		this.issueDate = issueDate;
 	}
 	
@@ -59,7 +65,34 @@ public class Club {
 	}
 	
 	
-	
+	public void addPetClient(String id, Pet p) {
+		
+	}
+	//-----Metodos de busqueda------------------------------------------
+	public int foundClientNameBi() {
+		int f = 0;
+		return f;
+	}
+	public int foundClientNameNo() {
+		int f = 0;
+		return f;
+	}
+	public int foundClienIdBi() {
+		int f = 0;
+		return f;
+	} 
+	public int foundClienIdNo() {
+		int f = 0;
+		return f;
+	} 
+	public int foundClienLastBi() {
+		int f = 0;
+		return f;
+	} 
+	public int foundClienLastNO() {
+		int f = 0;
+		return f;
+	} 
 	
 
 

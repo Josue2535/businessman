@@ -27,10 +27,10 @@ public class Main {
 		System.out.println("1. Register a new club.");
 		System.out.println("2. Register a new client.");
 		System.out.println("3. Add a pet to an existing client.");
-		System.out.println("4. Erase a club.");
-		System.out.println("5. Erase a client from a club.");
-		System.out.println("6. Erase a pet from a client.");
-		System.out.println("7. QUIT PROGRAM");
+		System.out.println("4. Delate a club.");
+		System.out.println("5. Delate a client from a club.");
+		System.out.println("6. Delate a pet from a client.");
+		System.out.println("7. CHAU ");
 		System.out.println("----------------------------------------- \n");
 	}
 	
@@ -79,17 +79,17 @@ public class Main {
 						
 					//ERASE A CLUB FROM THE PROGRAM
 					case 4: 
-						eraseAClub(); 
+						delateAClub(); 
 						break;
 						
 					//ERASE A CLIENT FROM THE PROGRAM
 					case 5: 
-						eraseAClient(); 
+						delateAClient(); 
 						break;
 						
 					//ERASE A PET FROM THE PROGRAM
 					case 6: 
-						eraseAPet(); 
+						delateAPet(); 
 						break;
 	
 					//QUIT PROGRAM
@@ -115,17 +115,17 @@ public class Main {
 		
 	}
 		
-		private void eraseAPet() {
+		private void delateAPet() {
 		// TODO Auto-generated method stub
 		
 	}
 
-		private void eraseAClient() {
+		private void delateAClient() {
 		// TODO Auto-generated method stub
 		
 		}
 
-		private void eraseAClub() {
+		private void delateAClub() {
 		// TODO Auto-generated method stub
 		
 		}
@@ -148,7 +148,7 @@ public class Main {
 		
 
 		public void theGoodbye() {
-			System.out.print("\033[H\033[2J");  
+			System.out.print("see you later");  
 			System.out.flush(); 
 			System.out.println("");
 			System.out.println("");
@@ -156,4 +156,4 @@ public class Main {
 		
 	
 
-}//end of class
+}

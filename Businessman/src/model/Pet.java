@@ -1,7 +1,8 @@
 
 package model;
 import java.io.Serializable;
-import java.util.GregorianCalendar;
+import java.util.Comparator;
+import java.util.Date;
 
 
 
@@ -12,39 +13,34 @@ import java.util.GregorianCalendar;
  * college Icesi (Cali-Colombia)
  * github: https://github.com/Josue2535
  */
-public class Pet implements Serializable {
+public class Pet implements Serializable{
 	
 	
 
-	public final static int DOG = 1;
-	public final static int CAT = 2;
-	public final static int BIRD = 3;
-	public final static int HAMSTER = 4;
-	public final static int FERRET = 5;
-	public final static char MALE = 'M';
-	public final static char FEMALE = 'F';
+
+	public final static String MALE = "MALE";
+	public final static String FEMALE = "FEMALE";
 	
 	
 	
 	private String id;
 	private String name;
-	private GregorianCalendar birthDate;
-	private char gender;
-	private int type;
-	
-	
-	private Client owner;
+	private Date birthDate;
+	private String gender;
+	private String type;
 	
 	
 	
-	public Pet(String id, String name, GregorianCalendar birthDate, char gender, int type, Client owner) {
+	
+	
+	public Pet(String id, String name, Date birthDate, String gender, String type) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.birthDate = birthDate;
 		this.gender = gender;
 		this.type = type;
-		this.owner = owner;
+		
 	}
 
 	//getters and setters
@@ -73,52 +69,99 @@ public class Pet implements Serializable {
 
 
 
-	public GregorianCalendar getBirthDate() {
+	public Date getBirthDate() {
 		return birthDate;
 	}
 
 
 
-	public void setBirthDate(GregorianCalendar birthDate) {
+	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 
 
 
-	public char getGender() {
+	public String getGender() {
 		return gender;
 	}
 
 
 
-	public void setGender(char gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
 
 
-	public int getType() {
+	public String getType() {
 		return type;
 	}
 
 
 
-	public void setType(int type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
 
 
-	public Client getOwner() {
-		return owner;
+	
+	//end getters and setters----------------------------------------------
+	public int compareId(Pet o) {
+		int valorComparacion = id.compareToIgnoreCase( o.getId() );
+    	if(valorComparacion < 0){
+    		valorComparacion = -1;
+    	}else if(valorComparacion == 0){
+    		valorComparacion = 0;
+    	}else{
+    		valorComparacion = 1;
+    	}
+        return valorComparacion;
+		
+	}
+	
+	public int comparePetBirth(Pet p) {
+		int com = 0;
+		 if( birthDate.compareTo(p.getBirthDate())>0)
+	           com = 1;
+	        else if( birthDate.compareTo(p.getBirthDate())<0 )
+	            com = -1;
+		return com;
+	}
+	
+	public int comparePetName(Pet p) {
+		int com = name.compareToIgnoreCase(p.getName());
+		if(com < 0) {
+			com = -1;
+		}
+		if(com > 0) {
+			com= 1;
+		}
+		
+		return com;
 	}
 
-
-
-	public void setOwner(Client owner) {
-		this.owner = owner;
+	public int comparePetGender(Pet p) {
+		int com = gender.compareToIgnoreCase(p.getGender());
+		if(com < 0) {
+			com = -1;
+		}
+		if(com > 0) {
+			com= 1;
+		}
+		return com;
 	}
-	//fin getters and setters
+	public int comparePetType(Pet p) {
+		int com = type.compareToIgnoreCase(p.getType());
+		if(com < 0) {
+			com = -1;
+		}
+		if(com > 0) {
+			com= 1;
+		}
+		return com;
+	}
+	
 
 	
 
