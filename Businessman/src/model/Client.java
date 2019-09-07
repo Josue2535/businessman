@@ -11,7 +11,7 @@ import java.util.Date;
  * @version 1.0 lab2 college Icesi (Cali-Colombia) github:
  *          https://github.com/Josue2535
  */
-public class Client implements Serializable {
+public class Client implements Serializable, Comparator<Client>, Comparable<Client> {
 
 	private String id;
 	private String name;
@@ -99,7 +99,7 @@ public class Client implements Serializable {
 		}
 	}
 
-	// ----------------insercion------------------------
+	// ----------------insercion----------
 	public void ordenationBirth() {
 		for (int i = 1; i < pets.size(); i++) {
 			Pet in = pets.get(i);
@@ -115,7 +115,7 @@ public class Client implements Serializable {
 		}
 	}
 
-	// ---------seleccion--------------------------
+	// ---------seleccion-----------------
 	public void ordenationName() {
 		int inicial;
 		for (inicial = 0; inicial < pets.size(); inicial++) {
@@ -159,7 +159,7 @@ public class Client implements Serializable {
 				Pet p1 = pets.get(j);
 				Pet p2 = pets.get(j + 1);
 
-				if (p1.comparePetType(p2) > 0) {
+				if (p1.comparePetType(p1, p2) > 0) {
 					pets.set(j, p2);
 					pets.set(j + 1, p1);
 				}
@@ -181,7 +181,113 @@ public class Client implements Serializable {
 		}
 	}
 
-	// ----------------comparison methods------------------------------
+	// ---------comparison methods---------
+	// ----------comparison by id----------
+	@Override
+	public int compareTo(Client o) {
+		int valorComparacion = id.compareToIgnoreCase(o.getId());
+		if (valorComparacion < 0) {
+			valorComparacion = -1;
+		} else if (valorComparacion == 0) {
+			valorComparacion = 0;
+		} else {
+			valorComparacion = 1;
+		}
+		return valorComparacion;
+	}
+
+	// -------comparison by name------------
+	
+	
+	
+	@Override
+	public int compare(Client o1, Client o2) {
+		int com = o1.getName().compareToIgnoreCase(o2.getName());
+		if (com < 0) {
+			com = -1;
+		}
+		if (com > 0) {
+			com = 1;
+		}
+
+		return com;
+	}
+
+	
+	
+	
+	// -------comparison by last name----------
+	public int compareLastName(Client o1, Client o2) {
+		int com = o1.getLastName().compareToIgnoreCase(o2.getLastName());
+		if (com < 0) {
+			com = -1;
+		}
+		if (com > 0) {
+			com = 1;
+		}
+		return com;
+	}
+	
+	
+	
+	
+	
+	//----------comparison by birthDate--------------------
+	public int compareBirth(Client o) {
+		int com = 0;
+		 if( birthDate.compareTo(o.getBirthDate())>0)
+	           com = 1;
+	        else if( birthDate.compareTo(o.getBirthDate())<0 )
+	            com = -1;
+		return com;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	//----------comparison by pets-------------------------
+	public int comparePets(Client o1) {
+		int com = 0;
+		if(pets.size() > o1.getPets().size()) {
+			com = 1;
+		}
+		if(pets.size() < o1.getPets().size()) {
+			com = -1;
+		}
+		return com;
+	}
+	
+	
+	
+	
+	
+	
+	//----------comparison by favorite type pet------------
+	public int compareFavTyPet(Client o1, Client o2) {
+		int com = o1.getFavTypePet().compareToIgnoreCase(o2.getFavTypePet());
+		if(com<0) {
+			com = -1;
+		}
+		if(com>0) {
+			com = 1;
+		}
+		return com;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	//----------------- methods to find----------------------
+	
+	
 	public ArrayList<Pet> findTypePetBi(Pet p) {
 		ArrayList<Pet> mi = new ArrayList<Pet>();
 		int position = -1;
@@ -191,9 +297,9 @@ public class Client implements Serializable {
 		while (start <= end && position == -1) {
 			int mid = (start + end) / 2;
 			Pet half = pets.get(mid);
-			if (half.comparePetType(p) == 0) {
+			if (half.comparePetType(half, p) == 0) {
 				position = mid;
-			} else if (half.comparePetType(p) > 0) {
+			} else if (half.comparePetType(half, p) > 0) {
 				end = mid - 1;
 			} else {
 				start = mid + 1;
@@ -202,28 +308,48 @@ public class Client implements Serializable {
 		mi.add(pets.get(position));
 
 		boolean found = false;
-		for (int i = 0; i < pets.size() && !found; i++) {
-
+		for (int i = position+1; i < pets.size() && !found; i++) {
+			if(p.comparePetType(p, pets.get(i))== 0) {
+				mi.add(pets.get(i));
+			}
+			else {
+				found = true;
+			}
+		}
+		found = false;
+		for(int q = position-1; q>=0 && !found; q--) {
+			if(p.comparePetType(p, pets.get(q))== 0) {
+				mi.add(pets.get(q));
+			}
+			else {
+				found = true;
+			}
 		}
 		return mi;
 	}
+	
+	
+	
+	
+	
 
 	public ArrayList<Pet> findTypePetNo(Pet p) {
 		ArrayList<Pet> mi = new ArrayList<Pet>();
 		int f = -1;
 		for (int i = 0; i < pets.size() && f == -1;) {
-			if (pets.get(i).comparePetType(p) == 0) {
+			if (pets.get(i).comparePetType(pets.get(i), p) == 0) {
 				f = i;
 			}
 		}
 		mi.add(pets.get(f));
 		boolean close = false;
 		for (int j = f; j < pets.size() && !close; j++) {
-			if (pets.get(j).comparePetType(p) == 0) {
+			if (pets.get(j).comparePetType(pets.get(j), p) == 0) {
 				mi.add(pets.get(j));
 			}
 		}
 		return mi;
 	}
+	
 
 }

@@ -13,7 +13,7 @@ import java.util.Date;
  * college Icesi (Cali-Colombia)
  * github: https://github.com/Josue2535
  */
-public class Pet implements Serializable, Comparable<Pet>{
+public class Pet implements Serializable, Comparable<Pet>, Comparator<Pet>{
 	
 	
 
@@ -151,8 +151,20 @@ public class Pet implements Serializable, Comparable<Pet>{
 		}
 		return com;
 	}
-	public int comparePetType(Pet p) {
-		int com = type.compareToIgnoreCase(p.getType());
+	public int comparePetType(Pet p2, Pet p) {
+		int com = p2.getType().compareToIgnoreCase(p.getType());
+		if(com < 0) {
+			com = -1;
+		}
+		if(com > 0) {
+			com= 1;
+		}
+		return com;
+	}
+
+	@Override
+	public int compare(Pet o1, Pet o2) {
+		int com = o1.getGender().compareToIgnoreCase(o2.getGender());
 		if(com < 0) {
 			com = -1;
 		}
