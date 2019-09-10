@@ -382,21 +382,28 @@ public class Businessman {
 	}
 
 	// -------------START METHODS TO ELIMINATE-------------
-	public boolean delateAPetById(Club club, String p) {
+	public boolean delateAPetById( String p) {
 		boolean de = false;
-		if (findClubByIdBi(club) != -1) {
-			if (clubs.get(findClubByIdBi(club)).deletePetClientNo(p)) {
-				de = true;
+		for (int i = 0; i < clubs.size(); i++) {
+			for (int j = 0; j < clubs.get(i).getClients().size(); j++) {
+				if(clubs.get(i).getClients().get(j).deletePet(p)) {
+					de = true;
+				}
+				
 			}
+			
 		}
+		
 		return de;
 	}
 
-	public boolean delateAClientNameOrId(Club c, String msj) {
+	public boolean delateAClientNameOrId( String msj) {
 		boolean de = false;
-		if (findClubByIdBi(c) != -1) {
-			de = clubs.get(findClubByIdBi(c)).delateClientByName(msj);
-
+		for (int i = 0; i < clubs.size(); i++) {
+			if(clubs.get(i).delateClientByName(msj)) {
+				de = true;
+			}
+			
 		}
 		return de;
 
@@ -413,27 +420,36 @@ public class Businessman {
 		return de;
 	}
 
-	public boolean addPet(Club c, Client c1, Pet p) {
-		boolean add = true;
+	public boolean addPet(Club c, Client c1, Pet p) throws AddPetException {
+		boolean add = false;
 		if (findClubByIdBi(c) != -1) {
 			add = clubs.get(findClubByIdBi(c)).addPetClient(p, c1);
 		}
-		return add;
-	}
-
-	public boolean registerANewClient(Club c, Client s) {
-		boolean add = false;
-		if (findClubByIdBi(c) != -1) {
-			add = clubs.get(findClubByIdBi(c)).addClientSpecial(s);
+		if(!add) {
+			throw new AddPetException("pet data is wrong");
 		}
 		return add;
 	}
 
-	public boolean registerANewClub(Club c) {
+	public boolean registerANewClient(Club c, Client s) throws CostumerIdExistException {
+		boolean add = false;
+		
+		if (findClubByIdBi(c) != -1) {
+			add = clubs.get(findClubByIdBi(c)).addClientSpecial(s);
+		}else {
+			throw new CostumerIdExistException("customer id already exists");
+		}
+		
+		return add;
+	}
+
+	public boolean registerANewClub(Club c) throws ErroneosDataClubException {
 		boolean add = false;
 		if (findClubByIdBi(c) == -1) {
 			addClub(c);
 			add = true;
+		}else {
+			throw new ErroneosDataClubException("the club id already exists");
 		}
 		return add;
 
