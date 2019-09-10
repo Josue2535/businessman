@@ -46,13 +46,14 @@ public class Businessman {
 				Club p1 = clubs.get(j);
 				Club p2 = clubs.get(j + 1);
 
-				if (p1.compare(p1,p2) > 0) {
+				if (p1.compare(p1, p2) > 0) {
 					clubs.set(j, p2);
 					clubs.set(j + 1, p1);
 				}
 			}
 		}
 	}
+
 	public void ordeningClubByName() {
 		for (int i = 1; i < clubs.size(); i++) {
 			Club in = clubs.get(i);
@@ -67,6 +68,7 @@ public class Businessman {
 			}
 		}
 	}
+
 	public void ordeningClubByClients() {
 		int inicial;
 		for (inicial = 0; inicial < clubs.size(); inicial++) {
@@ -89,6 +91,7 @@ public class Businessman {
 
 		}
 	}
+
 	public void ordeningClubByIssueDate() {
 		for (int i = clubs.size(); i > 0; i--) {
 			for (int j = 0; j < i - 1; j++) {
@@ -102,21 +105,23 @@ public class Businessman {
 			}
 		}
 	}
+
 	public void ordeningClubByTypeOfPet() {
 		for (int i = clubs.size(); i > 0; i--) {
 			for (int j = 0; j < i - 1; j++) {
 				Club p1 = clubs.get(j);
 				Club p2 = clubs.get(j + 1);
 
-				if (p1.compareTypePet(p1,p2) > 0) {
+				if (p1.compareTypePet(p1, p2) > 0) {
 					clubs.set(j, p2);
 					clubs.set(j + 1, p1);
 				}
 			}
 		}
 	}
-	//-------------END METHODS ORDENAORDERING---------------
-	//-------------START METHODS TO FIND--------------------
+
+	// -------------END METHODS ORDENAORDERING---------------
+	// -------------START METHODS TO FIND--------------------
 	public int findClubByIdBi(Club c) {
 		ordeningClubById();
 		int position = -1;
@@ -136,22 +141,22 @@ public class Businessman {
 		}
 		return position;
 	}
+
 	public int findClubByIdNo(Club c) {
 		ordeningClubById();
 		int position = -1;
 		boolean close = false;
-		for(int i = 0; i<clubs.size() && !false; i++) {
+		for (int i = 0; i < clubs.size() && !false; i++) {
 			Club c1 = clubs.get(i);
-			if(c.compare(c,c1)==0) {
+			if (c.compare(c, c1) == 0) {
 				position = i;
 				close = true;
 			}
 		}
-		
+
 		return position;
 	}
-	
-	
+
 	public int findClubByNameBi(Club c) {
 		ordeningClubByName();
 		int position = -1;
@@ -161,9 +166,9 @@ public class Businessman {
 		while (start <= end && position == -1) {
 			int mid = (start + end) / 2;
 			Club half = clubs.get(mid);
-			if (half.compareTo( c) == 0) {
+			if (half.compareTo(c) == 0) {
 				position = mid;
-			} else if (half.compareTo( c) > 0) {
+			} else if (half.compareTo(c) > 0) {
 				end = mid - 1;
 			} else {
 				start = mid + 1;
@@ -171,23 +176,22 @@ public class Businessman {
 		}
 		return position;
 	}
-	
+
 	public int findClubByNameNo(Club c) {
 		ordeningClubByName();
 		int position = -1;
 		boolean close = false;
-		for(int i = 0; i<clubs.size() && !false; i++) {
+		for (int i = 0; i < clubs.size() && !false; i++) {
 			Club c1 = clubs.get(i);
-			if(c.compareTo(c1)==0) {
+			if (c.compareTo(c1) == 0) {
 				position = i;
 				close = true;
 			}
 		}
-		
+
 		return position;
 	}
-	
-	
+
 	public ArrayList<Club> findClubByClientsBi(Club c) {
 		ordeningClubByClients();
 		ArrayList<Club> mi = new ArrayList<Club>();
@@ -198,9 +202,9 @@ public class Businessman {
 		while (start <= end && position == -1) {
 			int mid = (start + end) / 2;
 			Club half = clubs.get(mid);
-			if (half.compareClient ( c) == 0) {
+			if (half.compareClient(c) == 0) {
 				position = mid;
-			} else if (half.compareClient( c) > 0) {
+			} else if (half.compareClient(c) > 0) {
 				end = mid - 1;
 			} else {
 				start = mid + 1;
@@ -209,26 +213,25 @@ public class Businessman {
 		mi.add(clubs.get(position));
 
 		boolean found = false;
-		for (int i = position+1; i < clubs.size() && !found; i++) {
-			if(c.compareClient( clubs.get(i))== 0) {
+		for (int i = position + 1; i < clubs.size() && !found; i++) {
+			if (c.compareClient(clubs.get(i)) == 0) {
 				mi.add(clubs.get(i));
-			}
-			else {
+			} else {
 				found = true;
 			}
 		}
 		found = false;
-		for(int q = position-1; q>=0 && !found; q--) {
-			if(c.compareClient( clubs.get(q))== 0) {
+		for (int q = position - 1; q >= 0 && !found; q--) {
+			if (c.compareClient(clubs.get(q)) == 0) {
 				mi.add(clubs.get(q));
-			}
-			else {
+			} else {
 				found = true;
 			}
 		}
 		return mi;
 	}
-	public ArrayList<Club> findClubByClientsNo(Club c){
+
+	public ArrayList<Club> findClubByClientsNo(Club c) {
 		ordeningClubByClients();
 		ArrayList<Club> mi = new ArrayList<Club>();
 		int f = -1;
@@ -239,21 +242,20 @@ public class Businessman {
 		}
 		mi.add(clubs.get(f));
 		boolean close = false;
-		if(f == -1) {
+		if (f == -1) {
 			close = true;
 		}
 		for (int j = f; j < clubs.size() && !close; j++) {
 			if (clubs.get(j).compareClient(c) == 0) {
 				mi.add(clubs.get(j));
-			}
-			else {
+			} else {
 				close = true;
 			}
 		}
 		return mi;
 	}
-	
-	public ArrayList<Club> findClubByIssueDateBi(Club c){
+
+	public ArrayList<Club> findClubByIssueDateBi(Club c) {
 		ordeningClubByIssueDate();
 		ArrayList<Club> mi = new ArrayList<Club>();
 		int position = -1;
@@ -263,9 +265,9 @@ public class Businessman {
 		while (start <= end && position == -1) {
 			int mid = (start + end) / 2;
 			Club half = clubs.get(mid);
-			if (half.compareIssueDate( c) == 0) {
+			if (half.compareIssueDate(c) == 0) {
 				position = mid;
-			} else if (half.compareIssueDate( c) > 0) {
+			} else if (half.compareIssueDate(c) > 0) {
 				end = mid - 1;
 			} else {
 				start = mid + 1;
@@ -274,26 +276,25 @@ public class Businessman {
 		mi.add(clubs.get(position));
 
 		boolean found = false;
-		for (int i = position+1; i < clubs.size() && !found; i++) {
-			if(c.compareIssueDate( clubs.get(i))== 0) {
+		for (int i = position + 1; i < clubs.size() && !found; i++) {
+			if (c.compareIssueDate(clubs.get(i)) == 0) {
 				mi.add(clubs.get(i));
-			}
-			else {
+			} else {
 				found = true;
 			}
 		}
 		found = false;
-		for(int q = position-1; q>=0 && !found; q--) {
-			if(c.compareIssueDate( clubs.get(q))== 0) {
+		for (int q = position - 1; q >= 0 && !found; q--) {
+			if (c.compareIssueDate(clubs.get(q)) == 0) {
 				mi.add(clubs.get(q));
-			}
-			else {
+			} else {
 				found = true;
 			}
 		}
 		return mi;
 	}
-	public ArrayList<Club> findClubByIssueDateNo(Club c){
+
+	public ArrayList<Club> findClubByIssueDateNo(Club c) {
 		ordeningClubByIssueDate();
 		ArrayList<Club> mi = new ArrayList<Club>();
 		int f = -1;
@@ -304,20 +305,20 @@ public class Businessman {
 		}
 		mi.add(clubs.get(f));
 		boolean close = false;
-		if(f == -1) {
+		if (f == -1) {
 			close = true;
 		}
 		for (int j = f; j < clubs.size() && !close; j++) {
 			if (clubs.get(j).compareIssueDate(c) == 0) {
 				mi.add(clubs.get(j));
-			}
-			else {
+			} else {
 				close = true;
 			}
 		}
 		return mi;
 	}
-	public ArrayList<Club> findClubByTypeOfPetBi(Club c){
+
+	public ArrayList<Club> findClubByTypeOfPetBi(Club c) {
 		ordeningClubByTypeOfPet();
 		ArrayList<Club> mi = new ArrayList<Club>();
 		int position = -1;
@@ -338,54 +339,53 @@ public class Businessman {
 		mi.add(clubs.get(position));
 
 		boolean found = false;
-		for (int i = position+1; i < clubs.size() && !found; i++) {
-			if(c.compareTypePet(c, clubs.get(i))== 0) {
+		for (int i = position + 1; i < clubs.size() && !found; i++) {
+			if (c.compareTypePet(c, clubs.get(i)) == 0) {
 				mi.add(clubs.get(i));
-			}
-			else {
+			} else {
 				found = true;
 			}
 		}
 		found = false;
-		for(int q = position-1; q>=0 && !found; q--) {
-			if(c.compareTypePet(c,clubs.get(q))== 0) {
+		for (int q = position - 1; q >= 0 && !found; q--) {
+			if (c.compareTypePet(c, clubs.get(q)) == 0) {
 				mi.add(clubs.get(q));
-			}
-			else {
+			} else {
 				found = true;
 			}
 		}
 		return mi;
 	}
-	public ArrayList<Club> findClubByTypeOfPetNo(Club c){
+
+	public ArrayList<Club> findClubByTypeOfPetNo(Club c) {
 		ordeningClubByTypeOfPet();
 		ArrayList<Club> mi = new ArrayList<Club>();
 		int f = -1;
 		for (int i = 0; i < clubs.size() && f == -1;) {
-			if (clubs.get(i).compareTypePet(clubs.get(i),c) == 0) {
+			if (clubs.get(i).compareTypePet(clubs.get(i), c) == 0) {
 				f = i;
 			}
 		}
 		mi.add(clubs.get(f));
 		boolean close = false;
-		if(f == -1) {
+		if (f == -1) {
 			close = true;
 		}
 		for (int j = f; j < clubs.size() && !close; j++) {
-			if (clubs.get(j).compareTypePet(clubs.get(j),c) == 0) {
+			if (clubs.get(j).compareTypePet(clubs.get(j), c) == 0) {
 				mi.add(clubs.get(j));
-			}
-			else {
+			} else {
 				close = true;
 			}
 		}
 		return mi;
 	}
-	//-------------START METHODS TO ELIMINATE-------------
+
+	// -------------START METHODS TO ELIMINATE-------------
 	public boolean delateAPetById(Club club, String p) {
 		boolean de = false;
-		if(findClubByIdBi(club)!= -1) {
-			if(clubs.get(findClubByIdBi(club)).deletePetClientNo(p)) {
+		if (findClubByIdBi(club) != -1) {
+			if (clubs.get(findClubByIdBi(club)).deletePetClientNo(p)) {
 				de = true;
 			}
 		}
@@ -394,33 +394,375 @@ public class Businessman {
 
 	public boolean delateAClientNameOrId(Club c, String msj) {
 		boolean de = false;
-		if(findClubByIdBi(c)!= -1) {
+		if (findClubByIdBi(c) != -1) {
 			de = clubs.get(findClubByIdBi(c)).delateClientByName(msj);
-			
+
 		}
 		return de;
 
 	}
-	
-	public boolean delateAClub() {
-		
+
+	public boolean delateAClub(String msj) {
+		boolean de = false;
+		for (int i = 0; i < clubs.size(); i++) {
+			if (clubs.get(i).getName().equals(msj) || clubs.get(i).getId().equals(msj)) {
+				clubs.remove(i);
+				de = true;
+			}
+		}
+		return de;
+	}
+
+	public boolean addPet(Club c, Client c1, Pet p) {
+		boolean add = true;
+		if (findClubByIdBi(c) != -1) {
+			add = clubs.get(findClubByIdBi(c)).addPetClient(p, c1);
+		}
+		return add;
+	}
+
+	public boolean registerANewClient(Club c, Client s) {
+		boolean add = false;
+		if (findClubByIdBi(c) != -1) {
+			add = clubs.get(findClubByIdBi(c)).addClientSpecial(s);
+		}
+		return add;
+	}
+
+	public boolean registerANewClub(Club c) {
+		boolean add = false;
+		if (findClubByIdBi(c) == -1) {
+			addClub(c);
+			add = true;
+		}
+		return add;
 
 	}
 
-	public void addPet() {
-		// TODO Auto-generated method stub
+	// find Client
+	public boolean costumerExistIdBi(Client c) {
+		boolean exist = false;
+		for (int i = 0; i < clubs.size(); i++) {
+			if (clubs.get(i).foundClienIdBi(c) != -1) {
+				exist = true;
+			}
 
+		}
+		return exist;
 	}
 
-	public void registerANewClient(Club c, Client s) {
-		
+	public boolean costumerExistIdSe(Client c) {
+		boolean exist = false;
+		for (int i = 0; i < clubs.size(); i++) {
+			if (clubs.get(i).foundClienIdNo(c) != -1) {
+				exist = true;
+			}
 
+		}
+		return exist;
 	}
 
-	public void registerANewClub() {
-		// TODO Auto-generated method stub
+	public boolean costumerExistNameBi(Client c) {
+		boolean exist = false;
+		for (int i = 0; i < clubs.size(); i++) {
+			if (clubs.get(i).foundClientNameBi(c) != -1) {
+				exist = true;
+			}
 
+		}
+		return exist;
 	}
-	
+
+	public boolean costumerExistNameSe(Client c) {
+		boolean exist = false;
+		for (int i = 0; i < clubs.size(); i++) {
+			if (clubs.get(i).foundClientNameNo(c) != -1) {
+				exist = true;
+			}
+
+		}
+		return exist;
+	}
+
+	public boolean costumerExistLastBi(Client c) {
+		boolean exist = false;
+		for (int i = 0; i < clubs.size(); i++) {
+			if (clubs.get(i).foundClienLastBi(c) != -1) {
+				exist = true;
+			}
+
+		}
+		return exist;
+	}
+
+	public boolean costumerExistLastNo(Client c) {
+		boolean exist = false;
+		for (int i = 0; i < clubs.size(); i++) {
+			if (clubs.get(i).foundClienLastNO(c) != -1) {
+				exist = true;
+			}
+
+		}
+		return exist;
+	}
+
+	public String costumerExistBirthBi(Client c) {
+		String ms = "they are ";
+		int con = 0;
+		for (int i = 0; i < clubs.size(); i++) {
+			con += clubs.get(i).foundClienBirthBi(c).size();
+
+		}
+		ms += con + " clients with that date";
+		return ms;
+	}
+
+	public String costumerExistBirthNo(Client c) {
+		String ms = "they are ";
+		int con = 0;
+		for (int i = 0; i < clubs.size(); i++) {
+			con += clubs.get(i).foundClienBirthNO(c).size();
+
+		}
+		ms += con + " clients with that date";
+		return ms;
+	}
+
+	public String costumerExistPetsBi(Client c) {
+		String ms = "they are ";
+		int con = 0;
+		for (int i = 0; i < clubs.size(); i++) {
+			con += clubs.get(i).foundClienPetsBi(c).size();
+
+		}
+		ms += con + " clients with that amount of pets";
+		return ms;
+	}
+
+	public String costumerExistPetsNo(Client c) {
+		String ms = "they are ";
+		int con = 0;
+		for (int i = 0; i < clubs.size(); i++) {
+			con += clubs.get(i).foundClienPetsNO(c).size();
+
+		}
+		ms += con + " clients with that amount of pets";
+		return ms;
+	}
+
+	public String costumerExistFavPetsBi(Client c) {
+		String ms = "they are ";
+		int con = 0;
+		for (int i = 0; i < clubs.size(); i++) {
+			con += clubs.get(i).foundClientFvPeBi(c).size();
+
+		}
+		ms += con + " clients with kind of favorite pet";
+		return ms;
+	}
+
+	public String costumerExistFavPetsNo(Client c) {
+		String ms = "they are ";
+		int con = 0;
+		for (int i = 0; i < clubs.size(); i++) {
+			con += clubs.get(i).foundClientFvPeNo(c).size();
+
+		}
+		ms += con + " clients with kind of favorite pet";
+		return ms;
+	}
+
+	public boolean existPetIdBi(Pet p) {
+		boolean ex = false;
+		for (int i = 0; i < clubs.size(); i++) {
+			for (int j = 0; j < clubs.get(i).getClients().size(); j++) {
+				if (clubs.get(i).foundPetIdBi(clubs.get(i).getClients().get(j), p) != -1) {
+					ex = true;
+				}
+			}
+		}
+		return ex;
+	}
+
+	public boolean existPetIdNo(Pet p) {
+		boolean ex = false;
+		for (int i = 0; i < clubs.size(); i++) {
+			for (int j = 0; j < clubs.get(i).getClients().size(); j++) {
+				if (clubs.get(i).foundPetIdNo(clubs.get(i).getClients().get(j), p) != -1) {
+					ex = true;
+				}
+			}
+		}
+		return ex;
+	}
+
+	public boolean existPetNameNo(Pet p) {
+		boolean ex = false;
+		for (int i = 0; i < clubs.size(); i++) {
+			for (int j = 0; j < clubs.get(i).getClients().size(); j++) {
+				if (clubs.get(i).foundPetNameNo(clubs.get(i).getClients().get(j), p) != -1) {
+					ex = true;
+				}
+			}
+		}
+		return ex;
+	}
+
+	public boolean existPetNameBi(Pet p) {
+		boolean ex = false;
+		for (int i = 0; i < clubs.size(); i++) {
+			for (int j = 0; j < clubs.get(i).getClients().size(); j++) {
+				if (clubs.get(i).foundPetNameBi(clubs.get(i).getClients().get(j), p) != -1) {
+					ex = true;
+				}
+			}
+		}
+		return ex;
+	}
+
+	public String existPetTypeBi(Pet p) {
+		String ex = "They are ";
+		int co = 0;
+		for (int i = 0; i < clubs.size(); i++) {
+			for (int j = 0; j < clubs.get(i).getClients().size(); j++) {
+				co += clubs.get(i).foundPetTypeBi(clubs.get(i).getClients().get(j), p).size();
+
+			}
+		}
+		ex += co + "pets with this type";
+		return ex;
+	}
+
+	public String existPetTypeNo(Pet p) {
+		String ex = "They are ";
+		int co = 0;
+		for (int i = 0; i < clubs.size(); i++) {
+			for (int j = 0; j < clubs.get(i).getClients().size(); j++) {
+				co += clubs.get(i).foundPetTypeNo(clubs.get(i).getClients().get(j), p).size();
+
+			}
+		}
+		ex += co + "pets with this type";
+		return ex;
+	}
+
+	public String existPetDateBi(Pet p) {
+		String ex = "They are ";
+		int co = 0;
+		for (int i = 0; i < clubs.size(); i++) {
+			for (int j = 0; j < clubs.get(i).getClients().size(); j++) {
+				co += clubs.get(i).foundPetBirthBi(clubs.get(i).getClients().get(j), p).size();
+
+			}
+		}
+		ex += co + "pets with this date";
+		return ex;
+	}
+
+	public String existPetDateNo(Pet p) {
+		String ex = "They are ";
+		int co = 0;
+		for (int i = 0; i < clubs.size(); i++) {
+			for (int j = 0; j < clubs.get(i).getClients().size(); j++) {
+				co += clubs.get(i).foundPetBirthNO(clubs.get(i).getClients().get(j), p).size();
+
+			}
+		}
+		ex += co + "pets with this date";
+		return ex;
+	}
+
+	public String existPetGenderBi(Pet p) {
+		String ex = "They are ";
+		int co = 0;
+		for (int i = 0; i < clubs.size(); i++) {
+			for (int j = 0; j < clubs.get(i).getClients().size(); j++) {
+				co += clubs.get(i).foundPetGenderBi(clubs.get(i).getClients().get(j), p).size();
+
+			}
+		}
+		ex += co + "pets with this gender";
+		return ex;
+	}
+
+	public String existPetGenderNo(Pet p) {
+		String ex = "They are ";
+		int co = 0;
+		for (int i = 0; i < clubs.size(); i++) {
+			for (int j = 0; j < clubs.get(i).getClients().size(); j++) {
+				co += clubs.get(i).foundPetGenderNo(clubs.get(i).getClients().get(j), p).size();
+
+			}
+		}
+		ex += co + "pets with this gender";
+		return ex;
+	}
+
+	// ---------------Ordening all-------
+	public void ordeningAllByName() {
+		for (int i = 0; i < clubs.size(); i++) {
+			for (int j = 0; j < clubs.size(); j++) {
+				ordeningClubByName();
+				clubs.get(i).ordenaringClientName();
+				clubs.get(i).getClients().get(j).ordenationName();
+			}
+		}
+	}
+
+	public void ordeningAllById() {
+		for (int i = 0; i < clubs.size(); i++) {
+			for (int j = 0; j < clubs.size(); j++) {
+				ordeningClubById();
+				clubs.get(i).ordenaringClientId();
+				clubs.get(i).getClients().get(j).ordenationId();
+			}
+		}
+	}
+
+	public void ordeningAllByDate() {
+		for (int i = 0; i < clubs.size(); i++) {
+			for (int j = 0; j < clubs.size(); j++) {
+				ordeningClubByIssueDate();
+				clubs.get(i).ordenaringClientBirthDate();
+				clubs.get(i).getClients().get(j).ordenationDate();
+			}
+		}
+	}
+
+	public void ordeningAllByType() {
+		for (int i = 0; i < clubs.size(); i++) {
+			for (int j = 0; j < clubs.size(); j++) {
+				ordeningClubByTypeOfPet();
+				clubs.get(i).ordearingClientsFavTypePet();
+				clubs.get(i).getClients().get(j).ordenationType();
+			}
+		}
+	}
+
+	public void ordeningAllByNu() {
+		for (int i = 0; i < clubs.size(); i++) {
+			for (int j = 0; j < clubs.size(); j++) {
+				ordeningClubByClients();
+				clubs.get(i).ordenaringClientNuPets();
+			}
+		}
+	}
+
+	public void ordeningClientByLast() {
+		for (int i = 0; i < clubs.size(); i++) {
+
+			clubs.get(i).ordenaringClientLastName();
+
+		}
+	}
+
+	public void ordeningPetsByGender() {
+		for (int i = 0; i < clubs.size(); i++) {
+			for (int j = 0; j < clubs.size(); j++) {
+
+				clubs.get(i).getClients().get(j).ordenationGender();
+			}
+		}
+	}
 
 }
