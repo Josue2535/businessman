@@ -122,10 +122,11 @@ public class Pet implements Serializable, Comparable<Pet>, Comparator<Pet>{
 	
 	public int comparePetBirth(Pet p) {
 		int com = 0;
-		 if( birthDate.compareTo(p.getBirthDate())>0)
+		 if( birthDate.compareTo(p.getBirthDate())>0) {
 	           com = 1;
-	        else if( birthDate.compareTo(p.getBirthDate())<0 )
+		 }else if( birthDate.compareTo(p.getBirthDate())<0 ) {
 	            com = -1;
+		 }
 		return com;
 	}
 	
@@ -141,16 +142,7 @@ public class Pet implements Serializable, Comparable<Pet>, Comparator<Pet>{
 		return com;
 	}
 
-	public int comparePetGender(Pet p) {
-		int com = gender.compareToIgnoreCase(p.getGender());
-		if(com < 0) {
-			com = -1;
-		}
-		if(com > 0) {
-			com= 1;
-		}
-		return com;
-	}
+	
 	public int comparePetType(Pet p2, Pet p) {
 		int com = p2.getType().compareToIgnoreCase(p.getType());
 		if(com < 0) {
