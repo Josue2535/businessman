@@ -69,7 +69,7 @@ class ClubTest {
 	void ordeningTestId() {
 		setupStage();
 		club1.ordenaringClientId();
-		club1.ordenaringClientBirthDate();
+		
 		ArrayList<Client> ordening = new ArrayList<>();
 		ordening.add(c1);
 		ordening.add(c2);

@@ -1,4 +1,4 @@
-package model;
+package excptions;
 
 public class CostumerIdExistException extends Exception{
 

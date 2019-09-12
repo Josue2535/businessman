@@ -1,10 +1,10 @@
 
-
 package ui;
 
 import java.io.IOException;
 import java.util.*;
 import model.*;
+import excptions.*;
 
 public class Main {
 
@@ -61,37 +61,30 @@ public class Main {
 
 				switch (userInput) {
 
-				
 				case 1:
 					registerANewClub();
 					break;
 
-				
 				case 2:
 					registerANewClient();
 					break;
 
-				
 				case 3:
 					addPet();
 					break;
 
-				
 				case 4:
 					delateAClub();
 					break;
 
-				
 				case 5:
 					delateAClient();
 					break;
 
-				
 				case 6:
 					delateAPet();
 					break;
 
-				
 				case 7:
 					orderTheLab();
 					break;
@@ -104,7 +97,7 @@ public class Main {
 
 				default:
 					System.out.println();
-					System.out.println("Please type a number between 1 and 7");
+					System.out.println("Please type a number between 1 and 9");
 					System.out.println();
 					break;
 
@@ -121,42 +114,138 @@ public class Main {
 	}
 
 	private void find() {
+		long time, start, end;
 		int ele = 0;
 		int ele1 = 0;
 		String id = "";
 		Pet p;
-		long p1;
-		long p2;
+		int y,m,d;
 		System.out.println("1. find a pet");
 		System.out.println("2. find a client");
 		System.out.println("3. find a club");
 		try {
-		ele = reader.nextInt();
-		reader.nextLine();
-		
-		if(ele == 1) {
-			System.out.println("1. find a pet by id");
-			System.out.println("2. find a pet by name");
-			System.out.println("3. find a pet by gender");
-			System.out.println("4. find a pet by date");
-			System.out.println("5. find a pet by type");
-			ele1 = reader.nextInt();
+			ele = reader.nextInt();
 			reader.nextLine();
-			if(ele1 == 1) {
-				System.out.println("please enter the pet id");
-				id = reader.nextLine();
-				p = new Pet(id,null,null,null,null);
-				
-				if(bu.existPetIdBi(p)) {
-					System.out.println("the pet exist");
+
+			if (ele == 1) {
+				System.out.println("1. find a pet by id");
+				System.out.println("2. find a pet by name");
+				System.out.println("3. find a pet by gender");
+				System.out.println("4. find a pet by date");
+				System.out.println("5. find a pet by type");
+				ele1 = reader.nextInt();
+				reader.nextLine();
+				if (ele1 == 1) {
+					System.out.println("please enter the pet id");
+					id = reader.nextLine();
+					p = new Pet(id, null, null, null, null);
+
+					if (bu.existPetIdBi(p)) {
+						System.out.println("the pet exist");
+						start = System.currentTimeMillis();
+						bu.existPetIdBi(p);
+						end = System.currentTimeMillis();
+						time = end - start;
+						System.out.println("The binary method was delayed " + time + "milliseconds");
+						start = System.currentTimeMillis();
+						bu.existPetIdNo(p);
+						end = System.currentTimeMillis();
+						time = end - start;
+						System.out.println("The sequential method was delayed " + time + "milliseconds");
+					} else {
+						System.out.println("the pet was no found");
+					}
+				} else if (ele1 == 2) {
+					System.out.println("please enter the pet name");
+					id = reader.nextLine();
+					p = new Pet(null, id, null, null, null);
+
+					if (bu.existPetNameBi(p)) {
+						System.out.println("the pet exist");
+						start = System.currentTimeMillis();
+						bu.existPetNameBi(p);
+						end = System.currentTimeMillis();
+						time = end - start;
+						System.out.println("The binary method was delayed " + time + "milliseconds");
+						start = System.currentTimeMillis();
+						bu.existPetNameNo(p);
+						end = System.currentTimeMillis();
+						time = end - start;
+						System.out.println("The sequential method was delayed " + time + "milliseconds");
+					} else {
+						System.out.println("the pet was no found");
+					}
+				} else if (ele1 == 3) {
+					System.out.println("please enter the pet gender");
+					id = reader.nextLine();
+					p = new Pet(null, null, null, id, null);
+					System.out.println(bu.existPetGenderBi(p));
+
+					start = System.currentTimeMillis();
+					bu.existPetGenderBi(p);
+					end = System.currentTimeMillis();
+					time = end - start;
+					System.out.println("The binary method was delayed " + time + "milliseconds");
+					start = System.currentTimeMillis();
+					bu.existPetGenderNo(p);
+					end = System.currentTimeMillis();
+					time = end - start;
+					System.out.println("The sequential method was delayed " + time + "milliseconds");
+
+				} else if (ele1 == 4) {
+					System.out.println("please enter the pet birth year ");
+					y = reader.nextInt();
+					reader.nextLine();
+					System.out.println("please enter the pet birth mounth ");
+					m = reader.nextInt();
+					reader.nextLine();
+					System.out.println("please enter the pet birth day ");
+					d = reader.nextInt();
+					reader.nextLine();
+
+					Date d2 = new Date(y, m, d);
+					p = new Pet(null, null, d2, null, null);
+					System.out.println(bu.existPetDateBi(p));
+					start = System.currentTimeMillis();
+					bu.existPetDateBi(p);
+					end = System.currentTimeMillis();
+					time = end - start;
+					System.out.println("The binary method was delayed " + time + "milliseconds");
+					start = System.currentTimeMillis();
+					bu.existPetDateNo(p);
+					end = System.currentTimeMillis();
+					time = end - start;
+					System.out.println("The sequential method was delayed " + time + "milliseconds");
+				}else if(ele1 == 5) {
+					System.out.println("please enter the pet type");
+					id = reader.nextLine();
+					p = new Pet(null, null, null, null, id);
+					System.out.println(bu.existPetTypeBi(p));
+					start = System.currentTimeMillis();
+					bu.existPetTypeBi(p);
+					end = System.currentTimeMillis();
+					time = end - start;
+					System.out.println("The binary method was delayed " + time + "milliseconds");
+					start = System.currentTimeMillis();
+					bu.existPetTypeNo(p);
+					end = System.currentTimeMillis();
+					time = end - start;
+				}else {
+					System.out.println("Please enter a correct data");
 				}
+
+			}else if(ele == 2) {
+				System.out.println("1. find a client by id");
+				System.out.println("2. find a client by name");
+				System.out.println("3. find a client by last name");
+				System.out.println("4. find a client by date");
+				System.out.println("5. find a client by type");
+				System.out.println("6. ");
 			}
-		
-		}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println("please enter a correct data");
 		}
-		
+
 	}
 
 	private void orderTheLab() {
@@ -198,9 +287,9 @@ public class Main {
 		String id = "";
 		System.out.println("please enter the pet id or name ");
 		id = reader.nextLine();
-		if(bu.delateAPetById(id)) {
+		if (bu.delateAPetById(id)) {
 			System.out.println("the pets has been eliminated ");
-		}else {
+		} else {
 			System.out.println("the pets no found ");
 		}
 
@@ -210,9 +299,9 @@ public class Main {
 		String id = "";
 		System.out.println("please enter the client id or name ");
 		id = reader.nextLine();
-		if(bu.delateAClientNameOrId(id)) {
+		if (bu.delateAClientNameOrId(id)) {
 			System.out.println("the client has been eliminated ");
-		}else {
+		} else {
 			System.out.println("the client no found ");
 		}
 
@@ -222,9 +311,9 @@ public class Main {
 		String id = "";
 		System.out.println("please enter the club id or name ");
 		id = reader.nextLine();
-		if(bu.delateAClub(id)) {
+		if (bu.delateAClub(id)) {
 			System.out.println("the club has been eliminated ");
-		}else {
+		} else {
 			System.out.println("the club no found ");
 		}
 
@@ -232,112 +321,112 @@ public class Main {
 
 	private void addPet() {
 		try {
-		String name = "";
-		String id = "";
-		String gender;
-		String type;
-		Club c;
-		Client c1;
-		int year;
-		int m;
-		int d;
-		boolean cl = false;
-		while (!cl) {
-			id = reader.nextLine();
+			String name = "";
+			String id = "";
+			String gender;
+			String type;
+			Club c;
+			Client c1;
+			int year;
+			int m;
+			int d;
+			boolean cl = false;
+			while (!cl) {
+				id = reader.nextLine();
+				c = new Club(id, null, null, null);
+				if (bu.findClubByIdBi(c) == -1) {
+					System.out.println("please enter the club id ");
+				} else {
+					cl = true;
+				}
+			}
+			cl = false;
 			c = new Club(id, null, null, null);
-			if (bu.findClubByIdBi(c) == -1) {
-				System.out.println("please enter the club id ");
-			} else {
-				cl = true;
+			while (!cl) {
+				id = reader.nextLine();
+				c1 = new Client(id, null, null, null, null);
+				if (!bu.costumerExistIdBi(c1)) {
+					System.out.println("please enter the club id ");
+				} else {
+					cl = true;
+				}
 			}
-		}
-		cl = false;
-		c = new Club(id, null, null, null);
-		while (!cl) {
-			id = reader.nextLine();
 			c1 = new Client(id, null, null, null, null);
-			if (!bu.costumerExistIdBi(c1) ) {
-				System.out.println("please enter the club id ");
-			} else {
-				cl = true;
-			}
-		}
-		c1 = new Client(id, null, null, null, null);
-		System.out.println("please enter the pet id ");
-		id = reader.nextLine();
-		System.out.println("please enter the PET name ");
-		name = reader.nextLine();
-		System.out.println("please enter the pet birth year ");
-		year = reader.nextInt();
-		reader.nextLine();
-		System.out.println("please enter the pet birth mounth ");
-		m = reader.nextInt();
-		reader.nextLine();
-		System.out.println("please enter the pet birth day ");
-		d = reader.nextInt();
-		reader.nextLine();
-		
-		Date d2 = new Date(year, m, d);
-		System.out.println("please enter the pet gender ");
-		gender = reader.nextLine();
-		System.out.println("please enter the pet type ");
-		type = reader.nextLine();
-		Pet p = new Pet(id, name, d2, gender, type);
-		bu.addPet(c, c1, p);
-		}catch (Exception e) {
+			System.out.println("please enter the pet id ");
+			id = reader.nextLine();
+			System.out.println("please enter the PET name ");
+			name = reader.nextLine();
+			System.out.println("please enter the pet birth year ");
+			year = reader.nextInt();
+			reader.nextLine();
+			System.out.println("please enter the pet birth mounth ");
+			m = reader.nextInt();
+			reader.nextLine();
+			System.out.println("please enter the pet birth day ");
+			d = reader.nextInt();
+			reader.nextLine();
+
+			Date d2 = new Date(year, m, d);
+			System.out.println("please enter the pet gender ");
+			gender = reader.nextLine();
+			System.out.println("please enter the pet type ");
+			type = reader.nextLine();
+			Pet p = new Pet(id, name, d2, gender, type);
+			bu.addPet(c, c1, p);
+		} catch (Exception e) {
 			System.out.println("please enter the correct data and try again");
 		}
-		
+
 	}
 
 	private void registerANewClient() {
-		
+
 		try {
-		String id = "";
-		String name = "";
-		String lasNa = "";
-		String pet = "";
-		int year;
-		int m;
-		int d;
-		System.out.println("please enter the club id ");
-		boolean cl = false;
-		Club c;
-		while (!cl) {
-			id = reader.nextLine();
-			c = new Club(id, null, null, null);
-			
-			if (bu.findClubByIdBi(c) == -1) {
-				System.out.println("please enter the club id ");
-			} else {
-				cl = true;
+			String id = "";
+			String name = "";
+			String lasNa = "";
+			String pet = "";
+			int year;
+			int m;
+			int d;
+			System.out.println("please enter the club id ");
+			boolean cl = false;
+			Club c;
+			while (!cl) {
+				id = reader.nextLine();
+				c = new Club(id, null, null, null);
+
+				if (bu.findClubByIdBi(c) == -1) {
+					System.out.println("please enter the club id ");
+				} else {
+					cl = true;
+				}
 			}
-		}
-		c = new Club(id, null, null, null);
-		System.out.println("please enter the customer id ");
-		id = reader.nextLine();
-		System.out.println("please enter the customer name ");
-		name = reader.nextLine();
-		System.out.println("please enter the customer last name ");
-		lasNa = reader.nextLine();
-		System.out.println("please enter the customer큦 birth year ");
-		year = reader.nextInt();
-		reader.nextLine();
-		System.out.println("please enter the customer큦 birth mounth ");
-		m = reader.nextInt();
-		reader.nextLine();
-		System.out.println("please enter the customer큦 birth day ");
-		d = reader.nextInt();
-		reader.nextLine();
-		System.out.println("please enter the costumer큦 favorite type pet ");
-		pet = reader.nextLine();
-		Date d1 = new Date(year, m, d);
-		Client s = new Client(id, name, lasNa, d1, pet);
-		bu.registerANewClient(c, s);
-		}catch (Exception e) {
+			c = new Club(id, null, null, null);
+			System.out.println("please enter the customer id ");
+			id = reader.nextLine();
+			System.out.println("please enter the customer name ");
+			name = reader.nextLine();
+			System.out.println("please enter the customer last name ");
+			lasNa = reader.nextLine();
+			System.out.println("please enter the customer큦 birth year ");
+			year = reader.nextInt();
+			reader.nextLine();
+			System.out.println("please enter the customer큦 birth mounth ");
+			m = reader.nextInt();
+			reader.nextLine();
+			System.out.println("please enter the customer큦 birth day ");
+			d = reader.nextInt();
+			reader.nextLine();
+			System.out.println("please enter the costumer큦 favorite type pet ");
+			pet = reader.nextLine();
+			Date d1 = new Date(year, m, d);
+			Client s = new Client(id, name, lasNa, d1, pet);
+			bu.registerANewClient(c, s);
+		} catch (Exception e) {
 			System.out.println("please enter the correct data and try again");
 		}
-		
+
 	}
 
 	private void registerANewClub() {

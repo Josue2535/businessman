@@ -1,4 +1,4 @@
-package model;
+package excptions;
 
 public class AddPetException extends Exception {
  public AddPetException(String msj) {

@@ -9,6 +9,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+
+import excptions.AddPetException;
+import excptions.CostumerIdExistException;
+import excptions.ErroneosDataClubException;
+
 public class Businessman {
 
 	private String name;
