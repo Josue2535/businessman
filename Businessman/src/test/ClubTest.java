@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -26,7 +27,18 @@ class ClubTest {
 		 c1 = new Client("1005969243", "josue", "rodriguez", cd2, "cat");
 		 c2 = new Client("1029374933", "borrero", "felipe",d1, "dog" );
 		 c3 = new Client("1029382819", "marco", "Polo", d2, "bird");
-		 club1 = new Club("192837273", "Felipe", d3, "caballo");
+		 try {
+			club1 = new Club("192837273", "Felipe", d3, "caballo");
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		 club1.addClient(c1);
 		 club1.addClient(c2);
 		 club1.addClient(c3);

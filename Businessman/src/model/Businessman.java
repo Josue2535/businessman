@@ -6,6 +6,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -785,5 +788,35 @@ public class Businessman {
 			}
 		}
 	}
+	
+	public void loadData() throws NumberFormatException, ClassNotFoundException, ParseException {
+		File f = new File("./data/clubes.txt");
+		BufferedReader b = null;
+		try {
+			b = new BufferedReader(new FileReader(f));
+		}catch(FileNotFoundException e) {	
+		}
+		String line;
+		Club club = null;
+		try {
+			while((line = b.readLine())!=null) {
+				String[] s = line.split(" , ");
+				try {
+					SimpleDateFormat d = new SimpleDateFormat("yy-MM-dd");
+					Date d3 = (Date) d.parse(s[2]);
+					club = new Club (s[0], s[1],d3, s[3]);
+					clubs.add(club);
+				}catch(IOException e1) {
+					clubs.add(club);
+				}try {
+					b.close();
+				}catch(IOException e2){
+				}
+			}
+		}catch(IOException e3) {
+		}
+	}
+	
+	
 
 }

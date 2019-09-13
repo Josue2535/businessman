@@ -2,10 +2,15 @@
 package model;
 
 import java.io.BufferedReader;
+import java.io.EOFException;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -25,12 +30,17 @@ public class Club implements Comparable<Club>, Comparator<Club> {
 	private Date issueDate;
 	private String typeOfPet;
 
-	public Club(String id, String name, Date issueDate, String typeOfPet) {
+	public Club(String id, String name, Date issueDate, String typeOfPet)
+			throws IOException, NumberFormatException, ClassNotFoundException {
 		this.id = id;
 		this.name = name;
 		this.issueDate = issueDate;
 		typeOfPet = typeOfPet;
 		clients = new ArrayList<Client>();
+		if (!new File(id).exists()) {
+			new File(id).createNewFile();
+		}
+		loadData();
 	}
 
 	public String getId() {
@@ -658,4 +668,39 @@ public class Club implements Comparable<Club>, Comparator<Club> {
 		return add;
 	}
 
-} // end of class
+	// toString
+	public String toString() {
+		return id + "," + name + "," + issueDate.toString() + "," + typeOfPet;
+	}
+
+	public void loadData() throws NumberFormatException, IOException, ClassNotFoundException {
+
+		File f = new File("./data/"+id + ".csv");
+		BufferedReader br = new BufferedReader(new FileReader(f));
+		String line;
+		File f1 = new File(id);
+		ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream(f1));
+		
+		try {
+			while ((line = br.readLine()) != null) {
+				if (!line.equals("ID,name,last name,birthDate,favTypePet,idPet,pet name,datePet,gender,typePet")) {
+					String[] s = line.split(",");
+					Date d3 = new Date(s[3]);
+					Client e = new Client(s[0], s[1], s[2], d3, s[4]);
+					d3 = new Date(s[7]);
+					Pet e1 = new Pet(s[5], s[6], d3, s[8], s[9]);
+					e.addPet(e1);
+					clients.add(e);
+					o.writeObject(e);
+				}
+
+			}
+
+		} catch (Exception e) {
+
+		}
+		o.close();
+		br.close();
+
+	}
+}

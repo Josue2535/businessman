@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -24,8 +25,24 @@ class BusinessmanTest {
 		c2 = new Client("1029374933", "borrero", "felipe", d1, "dog");
 		c3 = new Client("1029382819", "marco", "Polo", d2, "bird");
 		bu = new Businessman("josue");
-		club1 = new Club("192", "Felipe", d2, "caballo");
-		club2 = new Club("192832312", "arroz", d1, "Lion");
+		try {
+			club1 = new Club("192", "Felipe", d2, "caballo");
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			club2 = new Club("192832312", "arroz", d1, "Lion");
+		} catch (NumberFormatException | ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		club1.addClient(c1);
 		club1.addClient(c2);
 		club2.addClient(c3);
@@ -36,8 +53,24 @@ class BusinessmanTest {
 	public void setupStage1() {
 		bu = new Businessman("josue");
 		Date d3 = new Date(2003 - 06 - 7);
-		club1 = new Club("192", "Felipe", d3, "caballo");
-		club2 = new Club("192832312", "arroz", d3, "Lion");
+		try {
+			club1 = new Club("192", "Felipe", d3, "caballo");
+		} catch (NumberFormatException | ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			club2 = new Club("192832312", "arroz", d3, "Lion");
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		bu.addClub(club1);
 		bu.addClub(club2);
 	}
